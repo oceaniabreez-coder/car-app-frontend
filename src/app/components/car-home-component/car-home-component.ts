@@ -4,6 +4,7 @@ import { CarDataComponent } from "../car-data-component/car-data-component";
 import { ApiService } from '../../services/api.service';
 import { Car } from '../../models/car-model';
 import { CarFilters } from '../../models/filter-model';
+import { Papa } from 'ngx-papaparse';
 
 @Component({
   selector: 'app-car-home-component',
@@ -13,10 +14,11 @@ import { CarFilters } from '../../models/filter-model';
 })
 export class CarHomeComponent implements OnInit{
 
+  constructor(private papa: Papa) {}
+
   viewCars = signal<Array<Car>>([]);
   carApiService = inject(ApiService)
   private carData:any[] =[];
-
 
   ngOnInit(): void {
     this.carApiService.searchCars('{}',100)
@@ -48,7 +50,21 @@ export class CarHomeComponent implements OnInit{
 
 
   downloadCsv(){
-    console.log("downloadCSV");
+  console.log("downloadCSV",this.carData);
+
+    if (!this.carData || this.carData.length === 0) {
+    alert('No data available to export.');
+    return;
+  }
+
+  const csv = this.papa.unparse(this.carData);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'car-data.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
 
   }
 
