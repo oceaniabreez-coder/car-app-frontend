@@ -1,1 +1,96 @@
-<p>car-filters-component works!</p>
+<form class="container mt-3" [formGroup]="searchCarForm">
+  <!-- Quick Filters -->
+  <div class="row g-3 align-items-end">
+    <div class="col-md-2">
+        <h5 class="mb-0">Quick Filters</h5>
+    </div>
+
+    <div class="col-md-10 text-end">
+            <a class="btn btn-primary me-1" data-bs-toggle="collapse" href="#advancedFilters" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Advance Filters
+  </a>
+    <button type="submit" class="btn btn-success me-1" (click)="onSearch()">Search</button>
+    <button type="reset" class="btn btn-secondary me-1">Reset</button>
+  </div>
+  <div class="row g-3">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+
+
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label" >Name</label>
+      <input type="text" class="form-control form-control-sm" formControlName="name"/>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label"  >Model Year</label>
+      <input type="text" class="form-control form-control-sm" formControlName="year"/>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Origin</label>
+      <input type="text" class="form-control form-control-sm"  formControlName="origin"/>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Cylinders</label>
+      <select class="form-select form-select-sm" formControlName="cylinders">
+        <option value="">Any</option>
+        <option>3</option><option>4</option><option>5</option><option>6</option><option>8</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- <hr class="my-4" /> -->
+
+  <!-- Performance & Specs -->
+  <div class="collapse mt-3" id="advancedFilters">
+  <div class="card card-body">
+  <div class="row g-3">
+    <div class="col-12"><h5>Performance & Specs</h5></div>
+
+    <div class="col-md-6">
+      <label class="form-label">MPG (5-60)</label>
+      <span class="fw-semibold">{{ searchCarForm.get('mpg')?.value || 60 }}</span>
+      <input type="range" class="form-range" min="5" max="60" step="1" formControlName="mpg"/>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Horsepower (50-400)</label>
+      <span class="fw-semibold">{{ searchCarForm.get('horsepower')?.value || 400 }}</span>
+      <input type="range" class="form-range" min="50" max="400" step="10" formControlName="horsepower"/>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Displacement cu in (70-500)</label>
+      <span class="fw-semibold">{{ searchCarForm.get('horsepower')?.value || 500 }}</span>
+      <input type="range" class="form-range" min="70" max="500" step="10" formControlName="displacement"/>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Weight lb (1500-6000)</label>
+      <span class="fw-semibold">{{ searchCarForm.get('weight')?.value || 1500 }}</span>
+      <input type="range" class="form-range" min="1500" max="6000" step="50" formControlName="weight"/>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Acceleration s (5-25)</label>
+      <span class="fw-semibold">{{ searchCarForm.get('acceleration')?.value || 25 }}</span>
+      <input type="range" class="form-range" min="5" max="25" step="0.5" formControlName="acceleration"/>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <hr class="my-4" />
+
+ <!-- Actions -->
+  <div class="row g-3 align-items-end">
+    <div class="col-md-10">
+      <button type="button" class="btn btn-primary me-1" data-bs-toggle="modal" data-bs-target="#addCarModal">Add Car</button>
+      <button type="submit" class="btn btn-warning me-1" (click)="downloadCsv()">Download CSV</button>
+    </div>
+  </div>
+</form>
