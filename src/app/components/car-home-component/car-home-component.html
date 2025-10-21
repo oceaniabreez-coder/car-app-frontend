@@ -1,1 +1,11 @@
-<p>car-home-component works!</p>
+
+<div class="row mb-3">
+  <div class="col-12">
+    <app-car-filters-component></app-car-filters-component>
+</div>
+</div>
+<div class="row">
+  <div class="col-12">
+<app-car-data-component [cars]="viewCars()"></app-car-data-component>
+</div>
+</div>
