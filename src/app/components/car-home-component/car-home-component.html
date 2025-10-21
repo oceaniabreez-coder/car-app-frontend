@@ -1,7 +1,6 @@
-
-<div class="row mb-3">
+ <div class="row mb-3">
   <div class="col-12">
-    <app-car-filters-component (search)="searchCars($event)" (add)="addCar($event)" (csv)="downloadCsv()"></app-car-filters-component>
+    <app-car-filters-component (search)="searchCars($event)" (add)="addCar($event)" (csv)="downloadCsv()" (sort)="carSorting()" ></app-car-filters-component>
 </div>
 </div>
 <div class="row">

@@ -4,13 +4,13 @@
     <div class="col-md-2">
         <h5 class="mb-0">Quick Filters</h5>
     </div>
-
-    <div class="col-md-10 text-end">
-            <a class="btn btn-primary me-1" data-bs-toggle="collapse" href="#advancedFilters" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <div class="col-md-10 text-end">
+    <a class="btn btn-primary me-1" data-bs-toggle="collapse" href="#advancedFilters" role="button" aria-expanded="false" aria-controls="collapseExample">
     Advance Filters
   </a>
     <button type="submit" class="btn btn-success me-1" (click)="onSearch()">Search</button>
-    <button type="reset" class="btn btn-secondary me-1">Reset</button>
+    <button type="submit" class="btn btn-secondary me-1" (click)="sortCars()">Sort</button>
+    <button type="reset" class="btn btn-dark me-1">Reset</button>
   </div>
   <div class="row g-3">
     <div class="col-12 d-flex justify-content-between align-items-center">
@@ -37,8 +37,11 @@
     <div class="col-md-3">
       <label class="form-label">Cylinders</label>
       <select class="form-select form-select-sm" formControlName="cylinders">
-        <option value="">Any</option>
-        <option>3</option><option>4</option><option>5</option><option>6</option><option>8</option>
+           <option [value]="3">3</option>
+           <option [value]="4">4</option>
+           <option [value]="5">5</option>
+           <option [value]="6">6</option>
+          <option [value]="8">8</option>
       </select>
     </div>
   </div>
@@ -51,35 +54,136 @@
   <div class="row g-3">
     <div class="col-12"><h5>Performance & Specs</h5></div>
 
-    <div class="col-md-6">
-      <label class="form-label">MPG (5-60) :</label>
-      <span class="fw-semibold">{{ searchCarForm.get('mpg')?.value || 60 }}</span>
-      <input type="range" class="form-range" min="5" max="60" step="0.1" formControlName="mpg"/>
-    </div>
+  <div class="col-md-6">
+  <label class="form-label">MPG Range (5 - 60):</label>
+  <div class="d-flex align-items-center">
+    <input
+      type="range"
+      class="form-range me-2"
+      min="5"
+      max="60"
+      step="0.1"
+      formControlName="mpgMin"
+    />
+    <input
+      type="range"
+      class="form-range ms-2"
+      min="5"
+      max="60"
+      step="0.1"
+      formControlName="mpgMax"
+    />
+  </div>
+  <div>
+    <span class="fw-semibold">From: {{ searchCarForm.get('mpgMin')?.value }}</span> -
+    <span class="fw-semibold">To: {{ searchCarForm.get('mpgMax')?.value }}</span>
+  </div>
+</div>
 
-    <div class="col-md-6">
-      <label class="form-label">Horsepower (50-400) :</label>
-      <span class="fw-semibold">{{ searchCarForm.get('horsepower')?.value || 400 }}</span>
-      <input type="range" class="form-range" min="50" max="400" step="1" formControlName="horsepower"/>
-    </div>
+  <div class="col-md-6">
+  <label class="form-label">Horsepower (50 - 400):</label>
+  <div class="d-flex align-items-center">
+    <input
+      type="range"
+      class="form-range me-2"
+      min="50"
+      max="400"
+      step="1"
+      formControlName="hpMin"
+    />
+    <input
+      type="range"
+      class="form-range ms-2"
+      min="50"
+      max="400"
+      step="1"
+      formControlName="hpMax"
+    />
+  </div>
+  <div>
+    <span class="fw-semibold">From: {{ searchCarForm.get('hpMin')?.value }}</span> -
+    <span class="fw-semibold">To: {{ searchCarForm.get('hpMax')?.value }}</span>
+  </div>
+</div>
 
-    <div class="col-md-6">
-      <label class="form-label">Displacement cu in (70-500) :</label>
-      <span class="fw-semibold">{{ searchCarForm.get('horsepower')?.value || 500 }}</span>
-      <input type="range" class="form-range" min="70" max="500" step="1" formControlName="displacement"/>
-    </div>
+  <div class="col-md-6">
+  <label class="form-label">Displacement cu in (70-500) :</label>
+  <div class="d-flex align-items-center">
+    <input
+      type="range"
+      class="form-range me-2"
+      min="70"
+      max="500"
+      step="1"
+      formControlName="dipMin"
+    />
+    <input
+      type="range"
+      class="form-range ms-2"
+      min="70"
+      max="500"
+      step="1"
+      formControlName="dipMax"
+    />
+  </div>
+  <div>
+    <span class="fw-semibold">From: {{ searchCarForm.get('dipMin')?.value }}</span> -
+    <span class="fw-semibold">To: {{ searchCarForm.get('dipMax')?.value }}</span>
+  </div>
+</div>
 
-    <div class="col-md-6">
-      <label class="form-label">Weight lb (1500-6000) :</label>
-      <span class="fw-semibold">{{ searchCarForm.get('weight')?.value || 1500 }}</span>
-      <input type="range" class="form-range" min="1500" max="6000" step="1" formControlName="weight"/>
-    </div>
+  <div class="col-md-6">
+  <label class="form-label">Weight lb (1500-6000) :</label>
+  <div class="d-flex align-items-center">
+    <input
+      type="range"
+      class="form-range me-2"
+      min="1500"
+      max="6000"
+      step="1"
+      formControlName="weightMin"
+    />
+    <input
+      type="range"
+      class="form-range ms-2"
+      min="1500"
+      max="6000"
+      step="1"
+      formControlName="weightMax"
+    />
+  </div>
+  <div>
+    <span class="fw-semibold">From: {{ searchCarForm.get('weightMin')?.value }}</span> -
+    <span class="fw-semibold">To: {{ searchCarForm.get('weightMax')?.value }}</span>
+  </div>
+  </div>
 
-    <div class="col-md-6">
-      <label class="form-label">Acceleration s (5-25) :</label>
-      <span class="fw-semibold">{{ searchCarForm.get('acceleration')?.value || 25 }}</span>
-      <input type="range" class="form-range" min="5" max="25" step="0.1" formControlName="acceleration"/>
-    </div>
+  <div class="col-md-6">
+  <label class="form-label">Acceleration s (5-25) :</label>
+  <div class="d-flex align-items-center">
+    <input
+      type="range"
+      class="form-range me-2"
+      min="5"
+      max="25"
+      step="0.1"
+      formControlName="accMin"
+    />
+    <input
+      type="range"
+      class="form-range ms-2"
+      min="5"
+      max="25"
+      step="0.1"
+      formControlName="accMax"
+    />
+  </div>
+  <div>
+    <span class="fw-semibold">From: {{ searchCarForm.get('accMin')?.value }}</span> -
+    <span class="fw-semibold">To: {{ searchCarForm.get('accMax')?.value }}</span>
+  </div>
+  </div>
+
   </div>
   </div>
   </div>

@@ -14,7 +14,8 @@ export class CarFiltersComponent implements OnInit{
 
     @Output() search = new EventEmitter<CarFilters>();
     @Output() add = new EventEmitter<Car>();
-    @Output() csv = new EventEmitter<void>()
+    @Output() csv = new EventEmitter<void>();
+    @Output() sort = new EventEmitter<void>()
   
     searchCarForm: FormGroup;
     addCarForm: FormGroup;
@@ -23,15 +24,19 @@ export class CarFiltersComponent implements OnInit{
     constructor(private fb: FormBuilder) {
       this.searchCarForm = this.fb.group({
       name: this.fb.control(''),
-      make: this.fb.control(''),
       year: this.fb.control(''),
       cylinders: this.fb.control(''),
-      horsepower: this.fb.control(''),
-      displacement: this.fb.control(''),
+      hpMin: this.fb.control(''),
+      hpMax: this.fb.control(''),
+      dipMin: this.fb.control(''),
+      dipMax: this.fb.control(''),
       origin: this.fb.control(''),
-      mpg: this.fb.control(''),
-      weight: this.fb.control(''),
-      acceleration: this.fb.control('')
+      mpgMin: this.fb.control(''),
+      mpgMax: this.fb.control(''),
+      weightMin: this.fb.control(''),
+      weightMax: this.fb.control(''),
+      accMin: this.fb.control(''),
+      accMax: this.fb.control(''),
   });
 
   this.addCarForm = this.fb.group({
@@ -63,6 +68,11 @@ export class CarFiltersComponent implements OnInit{
     onAddCar(){
       const newCar = this.addCarForm.value; 
       this.add.emit(newCar);
+    }
+
+    sortCars(){
+      this.sort.emit();
+
     }
 
     downloadCsv(){

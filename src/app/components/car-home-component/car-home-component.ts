@@ -3,22 +3,24 @@ import { CarFiltersComponent } from "../car-filters-component/car-filters-compon
 import { CarDataComponent } from "../car-data-component/car-data-component";
 import { ApiService } from '../../services/api.service';
 import { Car } from '../../models/car-model';
-import { CarFilters } from '../../models/filter-model';
+import { CarFilters, CarRangeFilters } from '../../models/filter-model';
 import { Papa } from 'ngx-papaparse';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-car-home-component',
-  imports: [CarFiltersComponent, CarDataComponent],
+  imports: [CarFiltersComponent, CarDataComponent,NgxSpinnerModule],
   templateUrl: './car-home-component.html',
   styleUrl: './car-home-component.scss'
 })
 export class CarHomeComponent implements OnInit{
 
-  constructor(private papa: Papa) {}
+  constructor(private papa: Papa,private spinner: NgxSpinnerService) {}
 
   viewCars = signal<Array<Car>>([]);
   carApiService = inject(ApiService)
   private carData:any[] =[];
+  isAscending: boolean = true;
 
   ngOnInit(): void {
     this.carApiService.searchCars('{}',100)
@@ -30,7 +32,7 @@ export class CarHomeComponent implements OnInit{
   }
 
 
-  searchCars(filters: CarFilters){
+  searchCars(filters: CarRangeFilters){
     console.log('Search requested with filters:', filters);
     this.carApiService.searchCars(filters,100)
     .subscribe((carList)=>{
@@ -46,6 +48,16 @@ export class CarHomeComponent implements OnInit{
     .subscribe((addedCar)=>{
       console.log(addedCar);
     })
+  }
+
+
+  carSorting(){
+     if (this.isAscending) {
+      this.carData.sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+      this.carData.sort((a, b) => b.name.localeCompare(a.name));
+    }
+    this.isAscending = !this.isAscending;
   }
 
 
