@@ -1,12 +1,12 @@
 export interface Car{
   id: string;
   name: string;
-  mpg: string;
-  cylinders: string;
-  displacement: string;
-  horsepower: string;
-  weight: string;
-  acceleration: string;
-  model_year: string;
+  mpg: number;
+  cylinders: number;
+  displacement: number;
+  horsepower: number;
+  weight: number;
+  acceleration: number;
+  model_year: number;
   origin: string;
 }
