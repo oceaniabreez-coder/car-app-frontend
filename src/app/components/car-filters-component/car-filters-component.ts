@@ -9,7 +9,7 @@ import { Car } from '../../models/car-model';
   templateUrl: './car-filters-component.html',
   styleUrl: './car-filters-component.scss'
 })
-export class CarFiltersComponent{
+export class CarFiltersComponent implements OnInit{
 
 
     @Output() search = new EventEmitter<CarFilters>();
@@ -18,6 +18,7 @@ export class CarFiltersComponent{
   
     searchCarForm: FormGroup;
     addCarForm: FormGroup;
+    private readonly STORAGE_KEY = 'carFilters:v1';
 
     constructor(private fb: FormBuilder) {
       this.searchCarForm = this.fb.group({
@@ -45,9 +46,17 @@ export class CarFiltersComponent{
     acceleration: this.fb.control('')
   });
 }
+  ngOnInit(): void {
+    const raw = localStorage.getItem(this.STORAGE_KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      this.searchCarForm.patchValue(saved, { emitEvent: false });
+    }
+  }
 
     onSearch(){
       const newFilter = this.searchCarForm.value; 
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(newFilter));
       this.search.emit(newFilter);
     }
 
