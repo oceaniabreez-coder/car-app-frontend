@@ -36,11 +36,16 @@ export class CarHomeComponent implements OnInit{
 
   searchCars(filters: CarRangeFilters){
     console.log('Search requested with filters:', filters);
-    this.carApiService.searchCars(filters,100)
-    .subscribe((carList)=>{
+    this.carApiService.searchCars(filters,100).subscribe({
+      next:(carList)=>{
       console.log(carList)
       this.carData = carList.cars;
       this.viewCars.set(carList.cars);
+    },
+    error: (err) => {
+        console.error(err);
+        this.toastr.error('Failed to search car. Please try again.', err);
+      }
     })
   }
 
