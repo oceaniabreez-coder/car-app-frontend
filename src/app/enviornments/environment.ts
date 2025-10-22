@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  //apiBaseUrl: 'https://car-service001-468076703521.australia-southeast1.run.app'
-  apiBaseUrl: 'http://localhost:8080'
+  apiBaseUrl: 'https://car-service001-468076703521.australia-southeast1.run.app'
+  //apiBaseUrl: 'http://localhost:8080'
 };
