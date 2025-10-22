@@ -61,8 +61,14 @@ export class CarFiltersComponent implements OnInit{
 
     onSearch(){
       const newFilter = this.searchCarForm.value; 
+      if(newFilter.model_year==0 ){
+          newFilter.model_year =null;
+      }
+      if(newFilter.cylinders==0 ){
+        newFilter.cylinders=null;
+      }
       newFilter.model_year = newFilter.model_year != null ? Number(newFilter.model_year) : undefined;
-      newFilter.cylinders = newFilter.cylinders != null ? Number(newFilter.cylinders) : undefined;
+      newFilter.cylinders = newFilter.cylinders != null  ? Number(newFilter.cylinders) : undefined;
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(newFilter));
       this.search.emit(newFilter);
     }
