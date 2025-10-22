@@ -44,6 +44,8 @@ export class CarDataComponent {
 
   onUpdate(){
     const updateCar = this.updateCarForm.value;
+    updateCar.model_year = Number(updateCar.model_year)
+    updateCar.cylinders = Number(updateCar.cylinders)
     this.update.emit(updateCar);
 
   }

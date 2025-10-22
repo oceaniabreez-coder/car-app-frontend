@@ -24,7 +24,7 @@ export class CarFiltersComponent implements OnInit{
     constructor(private fb: FormBuilder) {
       this.searchCarForm = this.fb.group({
       name: this.fb.control(''),
-      year: this.fb.control(''),
+      model_year: this.fb.control(''),
       cylinders: this.fb.control(''),
       hpMin: this.fb.control(''),
       hpMax: this.fb.control(''),
@@ -61,12 +61,16 @@ export class CarFiltersComponent implements OnInit{
 
     onSearch(){
       const newFilter = this.searchCarForm.value; 
+      newFilter.model_year = newFilter.model_year != null ? Number(newFilter.model_year) : undefined;
+      newFilter.cylinders = newFilter.cylinders != null ? Number(newFilter.cylinders) : undefined;
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(newFilter));
       this.search.emit(newFilter);
     }
 
     onAddCar(){
       const newCar = this.addCarForm.value; 
+      newCar.model_year = Number(newCar.model_year)
+      newCar.cylinders = Number(newCar.cylinders)
       this.add.emit(newCar);
     }
 
