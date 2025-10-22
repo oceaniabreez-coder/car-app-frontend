@@ -6,6 +6,7 @@ import { Car } from '../../models/car-model';
 import { CarFilters, CarRangeFilters } from '../../models/filter-model';
 import { Papa } from 'ngx-papaparse';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-car-home-component',
@@ -15,6 +16,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 })
 export class CarHomeComponent implements OnInit{
 
+  private toastr = inject(ToastrService);
   constructor(private papa: Papa,private spinner: NgxSpinnerService) {}
 
   viewCars = signal<Array<Car>>([]);
@@ -47,6 +49,7 @@ export class CarHomeComponent implements OnInit{
     this.carApiService.addCar(car)
     .subscribe((addedCar)=>{
       console.log(addedCar);
+       this.toastr.error('Car added successfully!', 'Delete');
     })
   }
   
@@ -63,6 +66,7 @@ export class CarHomeComponent implements OnInit{
     this.carApiService.deleteCar(car.id)
     .subscribe((deletedCar)=>{
       console.log("deleted car",deletedCar);
+       this.toastr.success('Car deleted successfully!', 'Success');
     })
   }
 

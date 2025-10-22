@@ -20,6 +20,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^20.3.6",
     "@angular/common": "^20.1.0",
     "@angular/compiler": "^20.1.0",
     "@angular/core": "^20.1.0",
@@ -28,6 +29,7 @@
     "@angular/router": "^20.1.0",
     "ngx-papaparse": "^8.0.0",
     "ngx-spinner": "^19.0.0",
+    "ngx-toastr": "^19.1.0",
     "ngx-ui-loader": "^19.0.0",
     "papaparse": "^5.5.3",
     "rxjs": "~7.8.0",
