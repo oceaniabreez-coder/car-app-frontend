@@ -54,7 +54,7 @@ export class CarHomeComponent implements OnInit{
     this.carApiService.addCar(car)
     .subscribe((addedCar)=>{
       console.log(addedCar);
-       this.toastr.error('Car added successfully!', 'Delete');
+       this.toastr.success('Car added successfully!', 'Success');
     })
   }
   
@@ -71,7 +71,7 @@ export class CarHomeComponent implements OnInit{
     this.carApiService.deleteCar(car.id)
     .subscribe((deletedCar)=>{
       console.log("deleted car",deletedCar);
-       this.toastr.success('Car deleted successfully!', 'Success');
+       this.toastr.error('Car deleted successfully!', 'Success');
     })
   }
 
