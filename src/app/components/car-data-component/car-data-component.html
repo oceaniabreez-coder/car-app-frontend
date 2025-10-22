@@ -1,13 +1,14 @@
-<div class="container mt-4">
+<div class="container mt-4" data-bs-toggle="modal" data-bs-target="#updateCarModal">
   <div class="row g-3">
     @for (car of cars(); track car.id) {
-      <div class="col-12 col-sm-6 col-md-3 col-lg-1-5">
+      <div class="col-12 col-sm-6 col-md-3 col-lg-1-5"  (click)="openCar(car)">
         <div class="card h-100 shadow-sm">
           <img class="card-img-top" src="car.jpeg" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title text-capitalize">{{ car.name }}</h5>
             <p class="card-text mb-1"><strong>MPG:</strong> {{ car.mpg }}</p>
             <p class="card-text mb-1"><strong>Cylinders:</strong> {{ car.cylinders }}</p>
+            <p class="card-text mb-1"><strong>Displacement:</strong> {{ car.displacement }}</p>
             <p class="card-text mb-1"><strong>Horsepower:</strong> {{ car.horsepower }}</p>
             <p class="card-text mb-1"><strong>Weight:</strong> {{ car.weight }}</p>
             <p class="card-text mb-1"><strong>Year:</strong> {{ car.model_year }}</p>
@@ -17,5 +18,74 @@
         </div>
       </div>
     }
+  </div>
+</div>
+
+
+<!--Update new car modal-->
+
+<div class="modal fade" id="updateCarModal" tabindex="-1" aria-labelledby="updateCarModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateCarModalLabel">Update Car</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form [formGroup]="updateCarForm" (ngSubmit)="onUpdate()">
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" formControlName="name">
+              </div>
+              <div class="col-md-6">
+              <label class="form-label">Origin</label>
+               <input type="text" class="form-control" formControlName="origin">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Model Year</label>
+                <input type="number" class="form-control" formControlName="model_year" >
+              </div>
+               <div class="col-md-4">
+                <label class="form-label">Cylinders</label>
+                <input type="number" class="form-control" formControlName="model_year">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">MPG</label>
+                <input type="number" class="form-control" formControlName="mpg">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Horsepower</label>
+                <input type="number" class="form-control" formControlName="horsepower">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Displacement</label>
+                <input type="number" class="form-control" formControlName="displacement">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Weight</label>
+                <input type="number" class="form-control" formControlName="weight">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Acceleration</label>
+                <input type="number" class="form-control"formControlName="acceleration" >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onDelete()">Delete</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

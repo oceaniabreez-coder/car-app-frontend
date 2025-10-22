@@ -49,7 +49,22 @@ export class CarHomeComponent implements OnInit{
       console.log(addedCar);
     })
   }
+  
+  updateCar(car:Car){
+    console.log('car update',car);
+    this.carApiService.updateCar(car)
+    .subscribe((updatedCar)=>{
+      console.log(updatedCar);
+    })
+  }
 
+  deleteCar(car:Car){
+    console.log('car deleted',car)
+    this.carApiService.deleteCar(car.id)
+    .subscribe((deletedCar)=>{
+      console.log("deleted car",deletedCar);
+    })
+  }
 
   carSorting(){
      if (this.isAscending) {

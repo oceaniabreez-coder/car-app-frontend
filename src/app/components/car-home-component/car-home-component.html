@@ -5,6 +5,6 @@
 </div>
 <div class="row">
   <div class="col-12">
-<app-car-data-component [cars]="viewCars()"></app-car-data-component>
+<app-car-data-component [cars]="viewCars()" (update)="updateCar($event)" (delete)="deleteCar($event)"></app-car-data-component>
 </div>
 </div>

@@ -15,7 +15,7 @@ export class CarFiltersComponent implements OnInit{
     @Output() search = new EventEmitter<CarFilters>();
     @Output() add = new EventEmitter<Car>();
     @Output() csv = new EventEmitter<void>();
-    @Output() sort = new EventEmitter<void>()
+    @Output() sort = new EventEmitter<void>();
   
     searchCarForm: FormGroup;
     addCarForm: FormGroup;

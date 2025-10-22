@@ -22,7 +22,18 @@ export class ApiService {
     const url = this.baseUrl
     const body = car;
     return this.http.post<CarAddResponse>(url,body);
-
   }
+  
+  updateCar(car:Car){
+    const url = this.baseUrl
+    const body = car;
+    return this.http.put<CarAddResponse>(url,body);
+  }
+
+  deleteCar(id:string){
+    const url = `${this.baseUrl}/${id}`
+    return this.http.delete<CarAddResponse>(url);
+  }
+  
   
 }
