@@ -18,7 +18,7 @@
         <div class="card h-100 shadow-sm">
           <img class="card-img-top" src="car.jpeg" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title text-capitalize">{{ car.name }}</h5>
+            <h5 class="card-title">{{ car.name }}</h5>
             <p class="card-text mb-1"><strong>MPG:</strong> {{ car.mpg }}</p>
             <p class="card-text mb-1"><strong>Cylinders:</strong> {{ car.cylinders }}</p>
             <p class="card-text mb-1"><strong>Displacement:</strong> {{ car.displacement }}</p>
@@ -52,7 +52,7 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label">Name</label>
-                <input type="text" class="form-control" formControlName="name">
+                <input type="text" class="form-control" formControlName="name" >
               </div>
               <div class="col-md-6">
               <label class="form-label">Origin</label>

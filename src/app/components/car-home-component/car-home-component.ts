@@ -34,6 +34,7 @@ export class CarHomeComponent implements OnInit{
   }
 
 
+  //search car service
   searchCars(filters: CarRangeFilters){
     console.log('Search requested with filters:', filters);
     this.carApiService.searchCars(filters,100).subscribe({
@@ -42,39 +43,62 @@ export class CarHomeComponent implements OnInit{
       this.carData = carList.cars;
       this.viewCars.set(carList.cars);
     },
-    error: (err) => {
+      error: (err) => {
         console.error(err);
-        this.toastr.error('Failed to search car. Please try again.', err);
+        this.toastr.error('Failed to search car. Please change the filters and try again.', err);
       }
     })
   }
 
+    //Add new car service
     addCar(car:Car){
     console.log('new car added',car);
-    this.carApiService.addCar(car)
-    .subscribe((addedCar)=>{
+    this.carApiService.addCar(car).subscribe({
+      next:(addedCar)=>{
       console.log(addedCar);
        this.toastr.success('Car added successfully!', 'Success');
+    },
+     error: (err) => {
+        console.error(err);
+        this.toastr.error('Failed to add car. Please try again.', err);
+      }
     })
   }
   
+  //update car service
   updateCar(car:Car){
     console.log('car update',car);
-    this.carApiService.updateCar(car)
-    .subscribe((updatedCar)=>{
+    this.carApiService.updateCar(car).subscribe({
+      next:(updatedCar)=>{
       console.log(updatedCar);
+      this.toastr.success('Car updated successfully!', 'Success');
+    },
+    error: (err) => {
+        console.error(err);
+        this.toastr.error('Failed to update car. Please try again.', err);
+      }
+
     })
+
   }
 
+  //delete car service
   deleteCar(car:Car){
     console.log('car deleted',car)
-    this.carApiService.deleteCar(car.id)
-    .subscribe((deletedCar)=>{
+    this.carApiService.deleteCar(car.id).subscribe({
+      next:(deletedCar)=>{
       console.log("deleted car",deletedCar);
        this.toastr.error('Car deleted successfully!', 'Success');
+    },
+    error: (err) => {
+        console.error(err);
+        this.toastr.error('Failed to delete car. Please try again.', err);
+      }
+
     })
   }
 
+  //sorting service
   carSorting(){
      if (this.isAscending) {
       this.carData.sort((a, b) => a.name.localeCompare(b.name));
@@ -85,6 +109,7 @@ export class CarHomeComponent implements OnInit{
   }
 
 
+  //download CSV service
   downloadCsv(){
   console.log("downloadCSV",this.carData);
 
